@@ -39,7 +39,7 @@ form {
 }
 
 .header-content {
-  margin-top: 3%;
+  padding: 5% 0;
 }
 
 .header-heading {
@@ -87,4 +87,44 @@ form {
   .card-img-top {
     height: 15vw;
   }
+}
+
+.brag-user {
+  padding: 8% 0;
+  justify-content: center;
+}
+
+.size-user-two {
+  border-radius: 10px;
+  height: 250px;
+  width: 400px;
+  object-fit: cover;
+  margin-left: 10%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.newsletter {
+  width: 50%;
+  margin: auto 25%;
+}
+
+.newsletter-checkbox {
+  width: 50%;
+  margin: auto 26%;
+}
+
+.margin-user {
+  margin-top: 5%;
+}
+
+.faq-heading {
+  text-align: center;
+}
+
+.accordion {
+  width: 70%;
+  margin: auto 15%;
 }
