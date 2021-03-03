@@ -1,0 +1,17 @@
+.blog-content {
+  padding: 0 8%;
+}
+
+.blog-content .content-right {
+  float: right;
+}
+
+.lists {
+  padding-left: 5%;
+  padding-top: 1%;
+}
+
+.blog-image {
+  height: 500px;
+  object-fit: cover;
+}
