@@ -30,15 +30,6 @@
     </div>
   </div>
 </div>
-<!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the
-    1500s, when an unknown printer took a galley of type and scrambled it to
-    make a type specimen book. It has survived not only five centuries, but
-    also the leap into electronic typesetting, remaining essentially
-    unchanged. It was popularised in the 1960s with the release of Letraset
-    sheets containing Lorem Ipsum passages, and more recently with desktop
-    publishing software like Aldus PageMaker including versions of Lorem
-    Ipsum. -->
 
 <!-- Search bar & Tabs -->
 <div class="container">
@@ -70,27 +61,25 @@
 
 <!-- Blog content section -->
 <div class="container">
-  <div class="row mt-5" style="width: 50%; margin: 0 25%;">
-    <a href="/articles/new" class="btn btn-primary">Add Your Blog</a>
+  <div class="row mt-5" style="width: 50%; margin: 0 25%">
+    <a href="/articles/new" class="btn btn-primary">Write Blog Here</a>
   </div>
+
   <div class="row">
     <% articles.forEach(article => { %>
     <div class="col-md-6 col-lg-4 mt-5">
       <div class="card card-user" style="width: 20rem">
-        <img
-          class="card-img-top"
-          src="https://images.unsplash.com/photo-1614588108027-22a021c8d8e1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80"
-          alt="Card image cap"
-        />
+        <img class="card-img-top" src="<%= article.image %>" alt="image" />
+        <!-- https://images.unsplash.com/photo-1614588108027-22a021c8d8e1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80 -->
         <div class="card-body">
           <h5 class="card-title"><%= article.title %></h5>
           <div class="card-subtitle text-muted mb-2">
             <%= article.createdAt.toLocaleDateString() %>
           </div>
-          <p class="card-text">
-            <%= article.description %>
-          </p>
-          <a href="articles/<%= article.id %>" class="btn btn-primary">Read More</a>
+          <p class="card-text"><%= article.description %></p>
+          <a href="articles/<%= article.id %>" class="btn btn-primary"
+            >Read More</a
+          >
         </div>
       </div>
     </div>
@@ -170,7 +159,7 @@
         checked
       />
       <label class="form-check-label" for="flexCheckChecked">
-        Send me insightsul product news and occasional offers. You can
+        Send me insightful product news and occasional offers. You can
         Unsubscribe anytime.
       </label>
     </div>
