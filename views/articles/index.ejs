@@ -69,11 +69,8 @@
     <% articles.forEach(article => { %>
     <div class="col-md-6 col-lg-4 mt-5">
       <div class="card card-user" style="width: 20rem">
-        <img
-          class="card-img-top"
-          src="https://images.unsplash.com/photo-1614588108027-22a021c8d8e1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80"
-          alt="Card image cap"
-        />
+        <img class="card-img-top" src="<%= article.image %>" alt="image" />
+        <!-- https://images.unsplash.com/photo-1614588108027-22a021c8d8e1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80 -->
         <div class="card-body">
           <h5 class="card-title"><%= article.title %></h5>
           <div class="card-subtitle text-muted mb-2">
@@ -162,7 +159,7 @@
         checked
       />
       <label class="form-check-label" for="flexCheckChecked">
-        Send me insightsul product news and occasional offers. You can
+        Send me insightful product news and occasional offers. You can
         Unsubscribe anytime.
       </label>
     </div>
