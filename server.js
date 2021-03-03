@@ -1,28 +1,22 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const Article = require('./models/article')
-const articleRouter = require('./routes/articles')
-const app = express()
+const mongoose = require('mongoose');
+const app = require('./app');
 
-mongoose.connect('mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
-{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
+mongoose
+  .connect(
+    'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => console.log('Database connected!'))
+  .catch((err) => {
+    console.log('ERROR!!! ', err.message);
+  });
 
-
-app.set('view engine', 'ejs')
-
-app.use(express.urlencoded({ extended: false }))
-
-
-app.get('/', async (req, res) => {
-    const articles = await Article.find().sort({ createdAt: 'desc'})
-    res.render('articles/index', { articles: articles })
-})
-
-app.use('/articles', articleRouter)
-
-app.listen(5001)
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Everything seems connected at localhost:${PORT}`);
+});
