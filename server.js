@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const app = require('./app');
-
+const methodOverride = require('method-override');
 mongoose
   .connect(
     'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',

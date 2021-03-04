@@ -28,6 +28,11 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.render('articles/new', { article: article });
   }
-});
+})
+
+router.delete('/:id', async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id)
+  res.redirect('/')
+})
 
 module.exports = router;
