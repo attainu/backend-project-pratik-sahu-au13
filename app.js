@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
 
 const app = express();
 
@@ -10,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static(`${__dirname}/src`));
+app.use(methodOverride('_method'))
 
 app.get('/', async (req, res) => {
   const articles = await Article.find().sort({ createdAt: 'desc' });
