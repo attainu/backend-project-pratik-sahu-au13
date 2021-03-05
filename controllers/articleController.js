@@ -1,8 +1,12 @@
 const Article = require('../models/articleModel');
 
 exports.getHomepage = async (req, res) => {
-  const articles = await Article.find().sort({ createdAt: 'desc' });
-  res.render('articles/index', { articles: articles });
+  try {
+    const articles = await Article.find().sort({ createdAt: 'desc' });
+    res.render('articles/index', { articles: articles });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 exports.newArticleRoute = (req, res) => {
@@ -10,9 +14,13 @@ exports.newArticleRoute = (req, res) => {
 };
 
 exports.getArticle = async (req, res) => {
-  const article = await Article.findById(req.params.id);
-  if (article == null) res.redirect('/');
-  res.render('articles/show', { article: article });
+  try {
+    const article = await Article.findById(req.params.id);
+    if (article == null) res.redirect('/');
+    res.render('articles/show', { article: article });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 exports.createArticle = async (req, res) => {
@@ -26,11 +34,16 @@ exports.createArticle = async (req, res) => {
     await article.save();
     res.redirect(`/articles/${article.id}`);
   } catch (err) {
+    console.log(err.message);
     res.render('articles/new', { article: article });
   }
 };
 
 exports.deleteArticle = async (req, res) => {
-  await Article.findByIdAndDelete(req.params.id);
-  res.redirect('/');
+  try {
+    await Article.findByIdAndDelete(req.params.id);
+    res.redirect('/');
+  } catch (error) {
+    console.log(error.message);
+  }
 };
