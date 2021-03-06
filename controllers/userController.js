@@ -5,12 +5,15 @@ exports.getRegisterRoute = (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  });
   try {
+    var user = new User(
+      {
+        username: '',
+        email: '',
+        password: '',
+      },
+      { _id: false }
+    );
     await user.save();
     console.log(user);
     res.redirect('/');

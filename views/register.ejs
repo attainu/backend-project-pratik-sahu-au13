@@ -89,7 +89,8 @@
         <div class="form-group">
           <input
             type="text"
-            value="<%= user.username %>"
+            name="username"
+            value="<%= typeof username != 'undefined' ? username : '' %>"
             class="form-control"
             id="username"
             placeholder="Username"
@@ -99,9 +100,10 @@
         <div class="form-group">
           <input
             type="email"
-            value="<%= user.email %>"
+            name="email"
+            value="<%= typeof email != 'undefined' ? email : '' %>"
             class="form-control"
-            id="inputEmail"
+            id="email"
             placeholder="Email Address"
           />
         </div>
@@ -109,9 +111,10 @@
         <div class="form-group">
           <input
             type="password"
-            value="<%= user.password %>"
+            name="password"
+            value="<%= typeof password != 'undefined' ? password : '' %>"
             class="form-control"
-            id="inputPassword"
+            id="password"
             placeholder="Password"
           />
         </div>
