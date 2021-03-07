@@ -7,6 +7,7 @@ const articleRouter = require('./routes/articleRoutes');
 const userRouter = require('./routes/userRoutes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.static(`${__dirname}/src`));
