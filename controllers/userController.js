@@ -17,6 +17,7 @@ exports.createUser = async (req, res) => {
           password: req.body.password,
         });
         user.save();
+        req.session.userId = user._id;
         res.redirect('/');
       } catch (error) {
         console.log(error.message);
