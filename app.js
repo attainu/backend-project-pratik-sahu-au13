@@ -8,6 +8,7 @@ const app = express();
 const articleRouter = require('./routes/articleRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const middleware = require('./middlewares/middlewares');
 
 app.use(
   expressSession({
@@ -17,7 +18,8 @@ app.use(
         'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
       ttl: 1 * 24 * 60 * 60,
     }),
-  })
+  }),
+  middleware.currentUser
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));

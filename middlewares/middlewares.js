@@ -12,3 +12,15 @@ exports.checkUserSession = (req, res, next) => {
     next();
   });
 };
+
+exports.preventAuthedUser = (req, res, next) => {
+  if (req.session.userId) {
+    return res.redirect('/');
+  }
+  next();
+};
+
+exports.currentUser = (req, res, next) => {
+  res.locals.user = req.session.userId;
+  next();
+};
