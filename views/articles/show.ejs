@@ -92,12 +92,12 @@
 
 <div class="container">
   <div class="row mt-5 blog-content">
-    <% article.comments.forEach(comment => { %>
+    <% for(var i = 0; i < article.comments.length; i++){ %>
     <div class="mb-2">
       ◼️ <span style="display: inline;">Author Name</span> ◾ <small>Mar 04</small>
-      <p><%= comment.content %></p>
+      <p>😁<%= article.comments[i] %></p>
     </div>
-    <% }) %>
+    <% } %>
   </div>
   <hr>
 </div>
