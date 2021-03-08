@@ -12,9 +12,12 @@ router
   .route('/new')
   .get(middleware.checkUserSession, articleController.newArticleRoute);
 
+router.route('/:id/edit').get(articleController.getEditRoute);
+
 router
   .route('/:id')
   .get(articleController.getArticle)
+  .put(articleController.editArticle)
   .delete(articleController.deleteArticle);
 
 module.exports = router;

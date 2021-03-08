@@ -32,10 +32,10 @@ exports.createArticle = async (req, res) => {
     image: req.body.image,
     description: req.body.description,
     markdown: req.body.markdown,
-    author: {
-      id: req.user._id,
-      username: req.user.username,
-    },
+    // author: {
+    //   id: req.user._id,
+    //   username: req.user.username,
+    // },
   });
   try {
     await article.save();
@@ -44,6 +44,22 @@ exports.createArticle = async (req, res) => {
     console.log(err.message);
     res.render('articles/new', { article: article });
   }
+};
+
+exports.getEditRoute = (req, res) => {
+  Article.findById(req.params.id, (err, article) => {
+    res.render('articles/edit', { article: article });
+  });
+};
+
+exports.editArticle = (req, res) => {
+  Article.findByIdAndUpdate(req.params.id, req.body, (err, article) => {
+    if (err) {
+      res.redirect('/');
+    } else {
+      res.redirect(`/articles/${req.params.id}`);
+    }
+  });
 };
 
 exports.deleteArticle = async (req, res) => {
