@@ -1,10 +1,9 @@
-const mongoose = require("mongoose");
-const app = require("./app");
-const methodOverride = require("method-override");
+const mongoose = require('mongoose');
+const app = require('./app');
 
 mongoose
   .connect(
-    "mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority",
+    'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -12,9 +11,9 @@ mongoose
       useFindAndModify: false,
     }
   )
-  .then(() => console.log("Database connected!"))
+  .then(() => console.log('Database connected!'))
   .catch((err) => {
-    console.log("ERROR!!! ", err.message);
+    console.log('ERROR!!! ', err.message);
   });
 
 const PORT = process.env.PORT || 5001;

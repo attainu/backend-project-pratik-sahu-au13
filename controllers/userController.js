@@ -6,19 +6,24 @@ exports.getRegisterRoute = (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  try {
-    var user = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    await user.save();
-    console.log(user);
-    res.redirect('/');
-  } catch (error) {
-    console.log(error.message);
-    return res.redirect('/auth/register');
-  }
+  await User.findOne({ email: req.body.email }, (err, foundUser) => {
+    if (foundUser) {
+      return res.redirect('/auth/login');
+    } else {
+      try {
+        var user = new User({
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+        });
+        user.save();
+        res.redirect('/');
+      } catch (error) {
+        console.log(error.message);
+        return res.redirect('/auth/register');
+      }
+    }
+  });
 };
 
 exports.getLoginRoute = (req, res) => {

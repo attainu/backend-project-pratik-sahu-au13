@@ -29,6 +29,10 @@ exports.createArticle = async (req, res) => {
     image: req.body.image,
     description: req.body.description,
     markdown: req.body.markdown,
+    author: {
+      id: req.user._id,
+      username: req.user.username,
+    },
   });
   try {
     await article.save();
