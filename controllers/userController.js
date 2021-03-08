@@ -40,6 +40,7 @@ exports.loginUser = async (req, res) => {
           console.log('password not correct');
           res.redirect('/auth/login');
         } else {
+          req.session.userId = user._id;
           res.redirect('/');
         }
       });

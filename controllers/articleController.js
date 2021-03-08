@@ -10,7 +10,10 @@ exports.getHomepage = async (req, res) => {
 };
 
 exports.newArticleRoute = (req, res) => {
-  res.render('articles/new', { article: new Article() });
+  if (req.session.userId) {
+    return res.render('articles/new', { article: new Article() });
+  }
+  res.redirect('/auth/login');
 };
 
 exports.getArticle = async (req, res) => {

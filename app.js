@@ -1,11 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const expressSession = require('express-session');
+const mongoStore = require('connect-mongo').default;
 
 const app = express();
 const articleRouter = require('./routes/articleRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+
+app.use(
+  expressSession({
+    secret: 'BlogStreet',
+    store: mongoStore.create({
+      mongoUrl:
+        'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
+      ttl: 1 * 24 * 60 * 60,
+    }),
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
