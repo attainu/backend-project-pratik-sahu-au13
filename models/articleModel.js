@@ -11,6 +11,7 @@ const articleSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: true,
   },
   markdown: {
     type: String,
@@ -21,11 +22,8 @@ const articleSchema = new mongoose.Schema({
     default: Date.now,
   },
   author: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    username: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   comments: [
     {

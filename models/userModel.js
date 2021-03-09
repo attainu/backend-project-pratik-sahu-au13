@@ -14,6 +14,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  articles: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Article',
+    },
+  ],
+  role: {
+    type: String,
+    default: 'Blogger',
+  },
 });
 
 userSchema.pre('save', async function (next) {

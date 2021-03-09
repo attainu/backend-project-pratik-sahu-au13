@@ -13,6 +13,8 @@ const middleware = require('./middlewares/middlewares');
 app.use(
   expressSession({
     secret: 'BlogStreet',
+    saveUninitialized: true,
+    resave: true,
     store: mongoStore.create({
       mongoUrl:
         'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',

@@ -18,12 +18,24 @@ exports.newArticleRoute = (req, res) => {
 
 exports.getArticle = async (req, res) => {
   try {
-    const article = await Article.findById(req.params.id);
-    if (article == null) res.redirect('/');
-    res.render('articles/show', { article: article });
+    const article = await Article.findOne({ _id: req.params.id }).populate(
+      'comments'
+    );
+    if (article) {
+      res.render('articles/show', { article });
+    }
   } catch (error) {
     console.log(error.message);
+    res.redirect('/');
   }
+
+  // try {
+  //   const article = await Article.findById(req.params.id);
+  //   if (article == null) res.redirect('/');
+  //   res.render('articles/show', { article: article });
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
 };
 
 exports.createArticle = async (req, res) => {
@@ -32,10 +44,6 @@ exports.createArticle = async (req, res) => {
     image: req.body.image,
     description: req.body.description,
     markdown: req.body.markdown,
-    // author: {
-    //   id: req.user._id,
-    //   username: req.user.username,
-    // },
   });
   try {
     await article.save();
