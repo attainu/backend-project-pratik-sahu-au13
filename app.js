@@ -8,6 +8,7 @@ const app = express();
 const articleRouter = require('./routes/articleRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const portfolioRouter = require('./routes/portfolioRoutes');
 const middleware = require('./middlewares/middlewares');
 
 app.use(
@@ -26,7 +27,8 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.use(express.static(`${__dirname}/src`));
+app.use(express.static('./'));
+app.use(express.static('./src'));
 app.use(methodOverride('_method'));
 
 // ARTICLE ROUTES
@@ -39,5 +41,9 @@ app.use('/users', userRouter);
 
 // COMMENT ROUTES
 app.use('/articles/:id/comments', commentRouter);
+
+// PORTFOLIO ROUTES
+app.use('/', portfolioRouter);
+app.use('/portfolio', portfolioRouter);
 
 module.exports = app;

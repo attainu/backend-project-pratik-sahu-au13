@@ -1,0 +1,14 @@
+<%- include('../partials/header.ejs') -%>
+
+<div class="container">
+    <div class="row">
+        <a href="portfolio/<%= portfolio.id %>/edit" class="btn btn-info">Edit</a>
+    </div>
+    <div class="row">
+        <form action="/portfolio/<%= portfolio.id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') -%>
