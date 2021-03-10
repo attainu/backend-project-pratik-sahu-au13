@@ -3,6 +3,7 @@ const Article = require('../models/articleModel');
 exports.getHomepage = async (req, res) => {
   try {
     const articles = await Article.find().sort({ createdAt: 'desc' });
+    // console.log(articles);
     res.render('articles/index', { articles: articles });
   } catch (error) {
     console.log(error.message);
@@ -18,24 +19,20 @@ exports.newArticleRoute = (req, res) => {
 
 exports.getArticle = async (req, res) => {
   try {
-    const article = await Article.findOne({ _id: req.params.id }).populate(
-      'comments'
-    );
+    const article = await Article.findOne({ _id: req.params.id }).populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+      },
+    });
     if (article) {
+      console.log(article);
       res.render('articles/show', { article });
     }
   } catch (error) {
     console.log(error.message);
     res.redirect('/');
   }
-
-  // try {
-  //   const article = await Article.findById(req.params.id);
-  //   if (article == null) res.redirect('/');
-  //   res.render('articles/show', { article: article });
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
 };
 
 exports.createArticle = async (req, res) => {
@@ -60,14 +57,18 @@ exports.getEditRoute = (req, res) => {
   });
 };
 
-exports.editArticle = (req, res) => {
-  Article.findByIdAndUpdate(req.params.id, req.body, (err, article) => {
-    if (err) {
-      res.redirect('/');
-    } else {
-      res.redirect(`/articles/${req.params.id}`);
-    }
-  });
+exports.editArticle = async (req, res) => {
+  let article = await Article.findById(req.params.id);
+  article.title = req.body.title;
+  article.image = req.body.image;
+  article.description = req.body.description;
+  article.markdown = req.body.markdown;
+  try {
+    article = await article.save();
+    res.redirect(`/articles/${article.id}`);
+  } catch (error) {
+    res.render('articles/new', { article: article });
+  }
 };
 
 exports.deleteArticle = async (req, res) => {
