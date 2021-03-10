@@ -14,7 +14,10 @@ exports.createComment = async (req, res) => {
       try {
         comment.save();
         article.comments.push(comment);
-        article.save();
+        const success = article.save();
+        if (success) {
+          req.flash('message', 'Comment posted successfully');
+        }
         // console.log(comment.author);
         res.redirect(`/articles/${article._id}`);
       } catch (error) {

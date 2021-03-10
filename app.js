@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 const mongoStore = require('connect-mongo').default;
 
 const app = express();
@@ -14,8 +15,8 @@ const middleware = require('./middlewares/middlewares');
 app.use(
   expressSession({
     secret: 'BlogStreet',
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     store: mongoStore.create({
       mongoUrl:
         'mongodb+srv://backendpro:12334455@@cluster-backend-attainu.6rqij.mongodb.net/usersData?retryWrites=true&w=majority',
@@ -24,6 +25,7 @@ app.use(
   }),
   middleware.currentUser
 );
+app.use(flash());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));

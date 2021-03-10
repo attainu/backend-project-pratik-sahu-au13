@@ -16,9 +16,12 @@ exports.createUser = async (req, res) => {
           email: req.body.email,
           password: req.body.password,
         });
-        user.save();
+        const success = user.save();
         req.session.userId = user._id;
-        res.redirect('/');
+        if (success) {
+          req.flash('message', 'Registered successfully');
+          res.redirect('/');
+        }
       } catch (error) {
         console.log(error.message);
         return res.redirect('/auth/register');
@@ -42,6 +45,7 @@ exports.loginUser = async (req, res) => {
           res.redirect('/auth/login');
         } else {
           req.session.userId = user._id;
+          req.flash('message', 'Logged In successfully');
           res.redirect('/');
         }
       });

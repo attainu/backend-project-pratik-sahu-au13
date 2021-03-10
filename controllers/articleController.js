@@ -4,7 +4,10 @@ exports.getHomepage = async (req, res) => {
   try {
     const articles = await Article.find().sort({ createdAt: 'desc' });
     // console.log(articles);
-    res.render('articles/index', { articles: articles });
+    res.render('articles/index', {
+      articles: articles,
+      message: req.flash('message'),
+    });
   } catch (error) {
     console.log(error.message);
   }
@@ -12,22 +15,25 @@ exports.getHomepage = async (req, res) => {
 
 exports.newArticleRoute = (req, res) => {
   if (req.session.userId) {
-    return res.render('articles/new', { article: new Article() });
+    return res.render('articles/new', {
+      article: new Article(),
+      message: req.flash('message'),
+    });
   }
   res.redirect('/auth/login');
 };
 
 exports.getArticle = async (req, res) => {
   try {
-    const article = await Article.findOne({ _id: req.params.id }).populate({
-      path: 'comments',
-      populate: {
-        path: 'user',
-      },
-    });
+    const article = await Article.findOne({ _id: req.params.id }).populate(
+      'comments'
+    );
     if (article) {
-      console.log(article);
-      res.render('articles/show', { article });
+      // console.log(article);
+      res.render('articles/show', {
+        article: article,
+        message: req.flash('message'),
+      });
     }
   } catch (error) {
     console.log(error.message);
@@ -43,11 +49,18 @@ exports.createArticle = async (req, res) => {
     markdown: req.body.markdown,
   });
   try {
-    await article.save();
-    res.redirect(`/articles/${article.id}`);
+    const success = await article.save();
+    if (success) {
+      req.flash('message', 'Successfully posted');
+      res.redirect(`/articles/${article.id}`);
+    }
   } catch (err) {
     console.log(err.message);
-    res.render('articles/new', { article: article });
+    req.flash('message', 'Error occurred');
+    res.render('articles/new', {
+      article: article,
+      message: req.flash('message'),
+    });
   }
 };
 

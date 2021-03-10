@@ -40,6 +40,11 @@
 
 </style>
 
+<% if (message.length > 0) { %>
+  <div class="alert alert-success">
+    <%= message %>
+  </div>
+<% } %>
 <div class="container">
   <div class="row mt-5 blog-content">
     <h2 class="stand-out"><%= article.title %></h2>

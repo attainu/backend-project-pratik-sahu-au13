@@ -1,5 +1,10 @@
 <%- include('../partials/header.ejs') -%>
 
+<% if (message.length > 0) { %>
+  <div class="alert alert-success">
+    <%= message %>
+  </div>
+<% } %>
 <!-- Header Section -->
 <div class="container">
   <div class="row">
