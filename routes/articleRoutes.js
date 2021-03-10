@@ -6,7 +6,11 @@ const middleware = require('../middlewares/middlewares');
 router
   .route('/')
   .get(articleController.getHomepage)
-  .post(middleware.checkUserSession, articleController.createArticle);
+  .post(
+    middleware.checkUserSession,
+    middleware.currentUser,
+    articleController.createArticle
+  );
 
 router
   .route('/new')

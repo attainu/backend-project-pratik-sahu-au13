@@ -1,8 +1,10 @@
 const Comment = require('../models/commentModel');
 const Article = require('../models/articleModel');
+const User = require('../models/userModel');
 
 exports.createComment = async (req, res) => {
   // console.log(req.body);
+  const user = await User.findOne({ _id: req.session.userId });
   await Article.findById(req.params.id, (err, article) => {
     if (err) {
       console.log(err);
@@ -10,6 +12,7 @@ exports.createComment = async (req, res) => {
     } else {
       let comment = new Comment({
         content: req.body.content,
+        author: user.username,
       });
       try {
         comment.save();

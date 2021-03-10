@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
   content: String,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  author: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
   article: {
     type: mongoose.Schema.Types.ObjectId,

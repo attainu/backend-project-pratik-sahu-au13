@@ -52,12 +52,12 @@
   <div class="row mt-5 blog-content">
     <div class="col">
       <small>Created by</small>
-      <h5 class="stand-out">Jasmine</h5>
+      <h5 class="stand-out"><%= (article.author).charAt(0).toUpperCase() + (article.author).slice(1) %></h5>
     </div>
     <div class="col">
       <div class="content-right">
-        <small>Time</small>
-        <h5 class="stand-out">2 min read</h5>
+        <small>Published on</small>
+        <h5 class="stand-out"><%= article.createdAt.toLocaleDateString() %></h5>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
   </div>
   <div class="row mt-3 blog-content">
     <form action="/articles/<%= article._id %>/comments" method="POST">
-      <textarea style="display: block;" name="content" id="" cols="91" rows="5" placeholder="Add comments here..."></textarea>
+      <textarea style="display: block;" name="content" id="" cols="91" rows="5" placeholder="Add comments here..." required></textarea>
       <!-- <input type="text" name="content" class="form-control"> -->
       <button type="submit" class="btn btn-primary mt-3">Post</button>
       <!-- <a style="float: right;" class="btn btn-primary mt-3 mb-3" href="/articles/<%= article._id %>" type="submit">Post</a> -->
@@ -99,8 +99,8 @@
   <div class="row mt-5 blog-content">
     <% article.comments.forEach(comment => { %>
     <div class="mb-2">
-      ◼️ <span style="display: inline;">Author Name: <%= comment.author %></span> ◾ <small>Mar 04</small>
-      <p>➡️<%= comment.content %></p>
+      📛 <span style="display: inline;"><em><%= (comment.author).charAt(0).toUpperCase() + (comment.author).slice(1) %></em></span> ◾ <small><%= comment.createdAt.toLocaleDateString() %></small>
+      <p>➡️ <%= comment.content %></p>
     </div>
     <% }) %>
   </div>

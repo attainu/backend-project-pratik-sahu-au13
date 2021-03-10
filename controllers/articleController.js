@@ -1,4 +1,5 @@
 const Article = require('../models/articleModel');
+const User = require('../models/userModel');
 
 exports.getHomepage = async (req, res) => {
   try {
@@ -42,11 +43,14 @@ exports.getArticle = async (req, res) => {
 };
 
 exports.createArticle = async (req, res) => {
+  console.log(req.session.userId);
+  const user = await User.findOne({ _id: req.session.userId });
   let article = new Article({
     title: req.body.title,
     image: req.body.image,
     description: req.body.description,
     markdown: req.body.markdown,
+    author: user.username,
   });
   try {
     const success = await article.save();

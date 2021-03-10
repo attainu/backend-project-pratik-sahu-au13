@@ -14,6 +14,11 @@ const middleware = require('./middlewares/middlewares');
 
 app.use(
   expressSession({
+    // cookie: {
+    //   path: '/',
+    //   httpOnly: false,
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // },
     secret: 'BlogStreet',
     saveUninitialized: false,
     resave: false,
