@@ -28,6 +28,9 @@ const articleSchema = new mongoose.Schema({
   author: {
     type: String,
   },
+  authorEmail: {
+    type: String,
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

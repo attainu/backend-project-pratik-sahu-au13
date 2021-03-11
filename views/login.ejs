@@ -127,6 +127,13 @@ body {
 }
 </style>
 
+
+<% if (message.length > 0) { %>
+  <div class="alert alert-danger">
+    <%= message %>
+  </div>
+<% } %>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -142,7 +149,7 @@ body {
               <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
               <label for="inputPassword">Password</label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Log in</button>
+            <button style="background-color: #6C63FF;" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Log in</button>
           </form>
         </div>
       </div>

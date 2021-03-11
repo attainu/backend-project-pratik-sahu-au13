@@ -30,3 +30,15 @@ exports.createComment = async (req, res) => {
     }
   });
 };
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const author = await User.findOne({ _id: req.session.userId });
+    if (author.role === 'Admin') {
+      await Comment.findByIdAndDelete(req.params.id);
+      res.redirect('back');
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};

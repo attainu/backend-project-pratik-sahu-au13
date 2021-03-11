@@ -8,6 +8,7 @@ exports.getRegisterRoute = (req, res) => {
 exports.createUser = async (req, res) => {
   await User.findOne({ email: req.body.email }, (err, foundUser) => {
     if (foundUser) {
+      req.flash('message', 'Email already registered. Please login!');
       return res.redirect('/auth/login');
     } else {
       try {
@@ -31,7 +32,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.getLoginRoute = (req, res) => {
-  res.render('login');
+  res.render('login', { message: req.flash('message') });
 };
 
 exports.loginUser = async (req, res) => {

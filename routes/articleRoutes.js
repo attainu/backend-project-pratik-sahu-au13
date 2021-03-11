@@ -22,7 +22,7 @@ router
 
 router
   .route('/:id')
-  .get(articleController.getArticle)
+  .get(middleware.currentUser, articleController.getArticle)
   .put(middleware.checkUserSession, articleController.editArticle)
   .delete(middleware.checkUserSession, articleController.deleteArticle);
 

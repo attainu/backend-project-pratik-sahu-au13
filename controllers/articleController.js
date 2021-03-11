@@ -29,13 +29,24 @@ exports.getArticle = async (req, res) => {
     const article = await Article.findOne({ _id: req.params.id }).populate(
       'comments'
     );
-    if (article) {
-      // console.log(article);
-      res.render('articles/show', {
-        article: article,
-        message: req.flash('message'),
-      });
+    const author = await User.findOne({ _id: req.session.userId });
+    // console.log(article.authorEmail);
+    if (author != null) {
+      if (article.authorEmail === author.email) {
+        foundAuthor = author;
+      } else if (author.role === 'Admin') {
+        foundAuthor = author;
+      } else {
+        foundAuthor = null;
+      }
+    } else {
+      foundAuthor = null;
     }
+    res.render('articles/show', {
+      article: article,
+      foundAuthor: foundAuthor,
+      message: req.flash('message'),
+    });
   } catch (error) {
     console.log(error.message);
     res.redirect('/');
@@ -43,7 +54,7 @@ exports.getArticle = async (req, res) => {
 };
 
 exports.createArticle = async (req, res) => {
-  console.log(req.session.userId);
+  // console.log(req.session.userId);
   const user = await User.findOne({ _id: req.session.userId });
   let article = new Article({
     title: req.body.title,
@@ -51,6 +62,7 @@ exports.createArticle = async (req, res) => {
     description: req.body.description,
     markdown: req.body.markdown,
     author: user.username,
+    authorEmail: user.email,
   });
   try {
     const success = await article.save();
@@ -68,10 +80,9 @@ exports.createArticle = async (req, res) => {
   }
 };
 
-exports.getEditRoute = (req, res) => {
-  Article.findById(req.params.id, (err, article) => {
-    res.render('articles/edit', { article: article });
-  });
+exports.getEditRoute = async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.render('articles/edit', { article: article });
 };
 
 exports.editArticle = async (req, res) => {
