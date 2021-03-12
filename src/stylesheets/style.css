@@ -1,0 +1,181 @@
+* {
+  font-family: monospace, 'Source Code Pro';
+  font-size: 17px;
+}
+
+.brand-name-user {
+  font-size: 250%;
+  margin-left: 3%;
+}
+/* 
+  .card-img-top {
+    width: 100%;
+    height: 13vw;
+    object-fit: cover;
+  } */
+
+.size-user {
+  border-radius: 10px;
+  height: 250px;
+  width: 400px;
+  object-fit: cover;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+/* form {
+  float: right;
+  width: 20%;
+} */
+
+.nav-tabs {
+  float: left;
+  width: 100%;
+}
+
+.nav-user-one {
+  float: right;
+}
+
+.nav-user {
+  margin-right: 5%;
+}
+
+.header-content {
+  padding: 8% 0;
+}
+
+.header-heading {
+  text-align: center;
+}
+
+.card-img-top {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.card-user {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-style: none;
+}
+
+/* Equal-height card images */
+.card-img-top {
+  /*height: 11vw;*/
+  object-fit: cover;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .card-img-top {
+    height: 19vw;
+  }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .card-img-top {
+    height: 16vw;
+  }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .card-img-top {
+    height: 14vw;
+  }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 992px) {
+  .card-img-top {
+    height: 15vw;
+  }
+}
+
+.brag-user {
+  padding: 8% 0;
+  /* justify-content: center; */
+}
+
+.size-user-two {
+  border-radius: 10px;
+  height: 250px;
+  width: 400px;
+  object-fit: cover;
+  margin-left: 10%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.newsletter {
+  width: 70%;
+  margin: auto 15%;
+}
+
+.newsletter-checkbox {
+  width: 50%;
+  margin: auto 26%;
+}
+
+.margin-user {
+  margin-top: 5%;
+}
+
+.faq-heading {
+  text-align: center;
+}
+
+.accordion {
+  width: 70%;
+  margin: auto 15%;
+}
+
+#footer {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: 80px 0;
+  position: relative;
+}
+
+#footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #6c63ff;
+}
+
+#footer .container {
+  position: relative;
+}
+
+#footer h3 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+#footer p {
+  font-size: 15;
+  font-style: italic;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+
+#footer .copyright {
+  margin: 0 0 5px 0;
+}
+
+#footer .credits {
+  font-size: 13px;
+}
