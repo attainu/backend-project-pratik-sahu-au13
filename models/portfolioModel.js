@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const portfolioSchema = new mongoose.Schema({
+  portfolioAuthor: String,
   fullName: String,
   who: String,
   //

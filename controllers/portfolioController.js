@@ -1,8 +1,19 @@
 const Portfolio = require('../models/portfolioModel');
+const User = require('../models/userModel');
 
-exports.getProfile = (req, res) => {
+exports.getProfile = async (req, res) => {
   try {
-    res.render('portfolio/profile', { portfolio: new Portfolio() });
+    const portfolios = await Portfolio.find().sort({ createdAt: 'asc' });
+    const author = await User.findOne({ _id: req.session.userId });
+    if (author.role === 'Admin') {
+      foundAuthor = author;
+    } else {
+      foundAuthor = null;
+    }
+    res.render('portfolio/profile', {
+      portfolios: portfolios,
+      foundAuthor: foundAuthor,
+    });
   } catch (error) {
     console.log(error.message);
     res.redirect('/');
@@ -10,17 +21,14 @@ exports.getProfile = (req, res) => {
 };
 
 exports.getFillRoute = (req, res) => {
-  //   if (req.session.userId) {
   res.render('portfolio/fill', { portfolio: new Portfolio() });
-  //   }
-  //   res.redirect('/auth/login');
 };
 
 exports.getPortfolio = async (req, res) => {
   try {
     const portfolio = await Portfolio.findById({ _id: req.params.id });
-    if (portfolio == null) res.redirect('/');
-    res.render('portfolio/page', { portfolio: portfolio });
+    if (portfolio == null) return res.redirect('/');
+    res.render(`portfolio/page`, { portfolio: portfolio });
   } catch (error) {
     console.log(error.message);
     res.redirect('/');
@@ -28,7 +36,6 @@ exports.getPortfolio = async (req, res) => {
 };
 
 exports.createPortfolio = async (req, res) => {
-  // console.log(req.body);
   let portfolio = new Portfolio(req.body);
   try {
     await portfolio.save();
@@ -58,7 +65,7 @@ exports.createPortfolio = async (req, res) => {
 exports.deletePortfolio = async (req, res) => {
   try {
     await Portfolio.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+    res.redirect('/portfolio/profile');
   } catch (error) {
     console.log(error.message);
   }
